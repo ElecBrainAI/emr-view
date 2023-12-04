@@ -889,7 +889,7 @@ img {
   display: inline-flex;
   align-items: center;
   border-radius: 0.5rem;
-  border: 1.5rem solid #E2E2E4;
+  border: 1.5px solid #E2E2E4;
   --tw-bg-opacity: 1;
   background-color: #F9F9F9;
   padding-top: 0.325rem;
