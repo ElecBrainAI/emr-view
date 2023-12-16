@@ -1,114 +1,109 @@
 <script setup>
-import { onMounted } from 'vue'
-import { initFlowbite } from 'flowbite'
+import { onMounted } from 'vue';
+import { initFlowbite } from 'flowbite';
+import { FwbButton } from 'flowbite-vue';
 import 'https://unpkg.com/phosphor-icons';
-import { FwbButton } from 'flowbite-vue'
 
 onMounted(() => {
     initFlowbite();
 })
 
-// @ is an alias to /src
-// import HelloWorld from '@/components/HelloWorld.vue'
-//
-// export default {
-//   name: 'HomeView',
-// }
-  // ApexCharts options and config
-  window.addEventListener("load", function() {
-    let options = {
-      // set the labels option to true to show the labels on the X and Y axis
-      xaxis: {
+// ApexCharts options and config
+window.addEventListener("load", function() {
+  let options = {
+    // set the labels option to true to show the labels on the X and Y axis
+    xaxis: {
+      show: true,
+      categories: ['01 Feb', '02 Feb', '03 Feb', '04 Feb', '05 Feb', '06 Feb', '07 Feb'],
+      labels: {
         show: true,
-        categories: ['01 Feb', '02 Feb', '03 Feb', '04 Feb', '05 Feb', '06 Feb', '07 Feb'],
-        labels: {
-          show: true,
-          style: {
-            fontFamily: "Inter, sans-serif",
-            cssClass: 'text-xs font-normal fill-gray-500 dark:fill-gray-400'
-          }
-        },
-        axisBorder: {
-          show: false,
-        },
-        axisTicks: {
-          show: false,
-        },
-      },
-      yaxis: {
-        show: true,
-        labels: {
-          show: true,
-          style: {
-            fontFamily: "Inter, sans-serif",
-            cssClass: 'text-xs font-normal fill-gray-500 dark:fill-gray-400'
-          },
-          formatter: function (value) {
-            return '$' + value;
-          }
+        style: {
+          fontFamily: "Inter, sans-serif",
+          cssClass: 'text-xs font-normal fill-gray-500 dark:fill-gray-400'
         }
       },
-      series: [
-        {
-          name: "Developer Edition",
-          data: [150, 141, 145, 152, 135, 125],
-          color: "#1A56DB",
-        },
-        {
-          name: "Designer Edition",
-          data: [43, 13, 65, 12, 42, 73],
-          color: "#7E3BF2",
-        },
-      ],
-      chart: {
-        sparkline: {
-          enabled: false
-        },
-        height: "100%",
-        width: "100%",
-        type: "area",
-        fontFamily: "Inter, sans-serif",
-        dropShadow: {
-          enabled: false,
-        },
-        toolbar: {
-          show: false,
-        },
-      },
-      tooltip: {
-        enabled: true,
-        x: {
-          show: false,
-        },
-      },
-      fill: {
-        type: "gradient",
-        gradient: {
-          opacityFrom: 0.55,
-          opacityTo: 0,
-          shade: "#1C64F2",
-          gradientToColors: ["#1C64F2"],
-        },
-      },
-      dataLabels: {
-        enabled: false,
-      },
-      stroke: {
-        width: 6,
-      },
-      legend: {
-        show: false
-      },
-      grid: {
+      axisBorder: {
         show: false,
       },
-    }
+      axisTicks: {
+        show: false,
+      },
+    },
+    yaxis: {
+      show: true,
+      labels: {
+        show: true,
+        style: {
+          fontFamily: "Inter, sans-serif",
+          cssClass: 'text-xs font-normal fill-gray-500 dark:fill-gray-400'
+        },
+        formatter: function (value) {
+          return '$' + value;
+        }
+      }
+    },
+    series: [
+      {
+        name: "Developer Edition",
+        data: [150, 141, 145, 152, 135, 125],
+        color: "#1A56DB",
+      },
+      {
+        name: "Designer Edition",
+        data: [43, 13, 65, 12, 42, 73],
+        color: "#7E3BF2",
+      },
+    ],
+    chart: {
+      sparkline: {
+        enabled: false
+      },
+      height: "100%",
+      width: "100%",
+      type: "area",
+      fontFamily: "Inter, sans-serif",
+      dropShadow: {
+        enabled: false,
+      },
+      toolbar: {
+        show: false,
+      },
+    },
+    tooltip: {
+      enabled: true,
+      x: {
+        show: false,
+      },
+    },
+    fill: {
+      type: "gradient",
+      gradient: {
+        opacityFrom: 0.55,
+        opacityTo: 0,
+        shade: "#1C64F2",
+        gradientToColors: ["#1C64F2"],
+      },
+    },
+    dataLabels: {
+      enabled: false,
+    },
+    stroke: {
+      width: 6,
+    },
+    legend: {
+      show: false
+    },
+    grid: {
+      show: false,
+    },
+  }
 
-    if (document.getElementById("labels-chart") && typeof ApexCharts !== 'undefined') {
-      const chart = new ApexCharts(document.getElementById("labels-chart"), options);
-      chart.render();
-    }
-  });
+  if (document.getElementById("labels-chart") && typeof ApexCharts !== 'undefined') {
+    const chart = new ApexCharts(document.getElementById("labels-chart"), options);
+    chart.render();
+  }
+});
+
 </script>
 
 <template>
@@ -116,18 +111,385 @@ onMounted(() => {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Righteous&family=Song+Myung&family=Varela+Round&display=swap" rel="stylesheet">
+    <title></title>
   </head>
   <body>
-    <div class="h-screen flex overflow-hidden">
+    <!-- Patient Info modal -->
+    <div id="p-info-modal" tabindex="0" aria-hidden="true" class="modal hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-1000 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-[640px] max-h-full">
+            <!-- Modal content -->
+            <div class="modal relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <!-- Modal header -->
+                <div class="flex items-center justify-between p-2 md:p-2 border-b rounded-t dark:border-gray-600 ml-2">
+                    <h3 class="flex flex-row items-center text-xs font-semibold text-gray-600 dark:text-white">
+                        <svg class="w-3 h-3 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 18">
+                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm-2 3h4a4 4 0 0 1 4 4v2H1v-2a4 4 0 0 1 4-4Z"/>
+                        </svg>
+                        환자정보상세
+                    </h3>
+                    <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="p-info-modal">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                </div>
+                <!-- Modal body -->
+                <form class="p-4 md:p-5">
+
+                    <div class="grid gap-6 mb-6 md:grid-cols-1">
+                        <div>
+                            <label for="name" class="block mb-2 text-xs font-medium text-gray-600 dark:text-white">이름*</label>
+                            <input type="text" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="김메디" required>
+                        </div>
+                      </div>
+                    <div class="grid gap-6 mb-6 md:grid-cols-2">
+                        <div>
+                          <label for="resident" class="block mb-2 text-xs font-medium text-gray-600 dark:text-white">주민등록번호(외국인등록번호)*</label>
+                          <div class="flex flex-row">
+                            <input type="text" id="resident" class="mr-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="031006" required>
+                            <input type="text" id="resident" class="ml-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="4999999" required>
+                          </div>
+                        </div>
+                        <div class="flex items-center">
+                          <div class="flex items-center">
+                              <input checked id="checked-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                              <label for="checked-checkbox" class="ms-2 text-xs font-medium text-gray-900 dark:text-gray-300">주민등록번호가 없습니다.</label>
+                          </div>
+                        </div>
+                        <div>
+                            <label for="phone1" class="block mb-2 text-xs font-medium text-gray-600 dark:text-white">대표 연락처</label>
+                            <input type="tel" id="phone" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="010-1111-1111" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" required>
+                        </div>
+                        <div>
+                            <label for="phone2" class="block mb-2 text-xs font-medium text-gray-600 dark:text-white">비상 연락처</label>
+                            <input type="url" id="website" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="flowbite.com" required>
+                        </div>
+                    </div>
+                    <div class="grid gap-6 md:grid-cols-2">
+                        <div>
+                            <label for="address" class="block mb-2 text-xs font-medium text-gray-600 dark:text-white">주소</label>
+                            <div class="relative mb-2">
+                                <div class="absolute inset-y-0 start-0 top-0 flex items-center ps-3.5 pointer-events-none">
+                                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 20">
+                                        <path d="M8 0a7.992 7.992 0 0 0-6.583 12.535 1 1 0 0 0 .12.183l.12.146c.112.145.227.285.326.4l5.245 6.374a1 1 0 0 0 1.545-.003l5.092-6.205c.206-.222.4-.455.578-.7l.127-.155a.934.934 0 0 0 .122-.192A8.001 8.001 0 0 0 8 0Zm0 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z"/>
+                                    </svg>
+                                </div>
+                                <input type="text" id="zip-input" aria-describedby="helper-text-explanation" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="12345 or 12345-6789" pattern="^\d{5}(-\d{4})?$" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid mb-6 md:grid-cols-1">
+                            <div class="mb-2">
+                                <input type="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="도로명 주소" required>
+                            </div>
+                            <div class="mb-2">
+                                <input type="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="상세주소" required>
+                            </div>
+                    </div>
+                    <div class="flex justify-between">
+                      <button type="submit" class="text-gray-600 bg-white border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">취소</button>
+                      <button type="submit" class="text-white bg-sky-blue hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">수정</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Family list modal -->
+    <div id="family-list-modal" tabindex="0" aria-hidden="true" class="modal hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-1000 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-[440px] max-h-full">
+            <!-- Modal content -->
+            <div class="modal relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <!-- Modal header -->
+                <div class="flex items-center justify-between p-2 md:p-2 border-b rounded-t dark:border-gray-600 ml-2">
+                    <h3 class="flex flex-row items-center text-xs font-semibold text-gray-600 dark:text-white">
+                        가족관계
+                    </h3>
+
+
+                    <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="family-list-modal">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                </div>
+                <!-- Modal body -->
+                <form class="p-4 md:p-5">
+
+                    <div class="grid gap-6 mb-6 md:grid-cols-1">
+                      <p class="flex flex-row text-xs font-normal items-center">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                          <path d="M16 0H4a2 2 0 0 0-2 2v1H1a1 1 0 0 0 0 2h1v2H1a1 1 0 0 0 0 2h1v2H1a1 1 0 0 0 0 2h1v2H1a1 1 0 0 0 0 2h1v1a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5.5 4.5a3 3 0 1 1 0 6 3 3 0 0 1 0-6ZM13.929 17H7.071a.5.5 0 0 1-.5-.5 3.935 3.935 0 1 1 7.858 0 .5.5 0 0 1-.5.5Z"/>
+                        </svg>
+                        <a class="ml-1 font-semibold">이아들</a>
+                        <span class="ml-1">남 11세</span>
+<!--                          <span class="ml-4">-->
+<!--                            <button type="button" class="flex flex-row items-center">-->
+<!--                              <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">-->
+<!--                                <path d="M18 7.5h-.423l-.452-1.09.3-.3a1.5 1.5 0 0 0 0-2.121L16.01 2.575a1.5 1.5 0 0 0-2.121 0l-.3.3-1.089-.452V2A1.5 1.5 0 0 0 11 .5H9A1.5 1.5 0 0 0 7.5 2v.423l-1.09.452-.3-.3a1.5 1.5 0 0 0-2.121 0L2.576 3.99a1.5 1.5 0 0 0 0 2.121l.3.3L2.423 7.5H2A1.5 1.5 0 0 0 .5 9v2A1.5 1.5 0 0 0 2 12.5h.423l.452 1.09-.3.3a1.5 1.5 0 0 0 0 2.121l1.415 1.413a1.5 1.5 0 0 0 2.121 0l.3-.3 1.09.452V18A1.5 1.5 0 0 0 9 19.5h2a1.5 1.5 0 0 0 1.5-1.5v-.423l1.09-.452.3.3a1.5 1.5 0 0 0 2.121 0l1.415-1.414a1.5 1.5 0 0 0 0-2.121l-.3-.3.452-1.09H18a1.5 1.5 0 0 0 1.5-1.5V9A1.5 1.5 0 0 0 18 7.5Zm-8 6a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Z"/>-->
+<!--                              </svg>-->
+<!--                              <span class="ml-1">정보수정</span>-->
+<!--                            </button>-->
+<!--                          </span>-->
+                      </p>
+                    </div>
+
+
+                    <div class="flex justify-between">
+                      <button type="button" data-modal-target="add-family-list-modal" data-modal-toggle="add-family-list-modal" class="text-gray-600 bg-white border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">가족추가</button>
+                      <button type="button" data-modal-toggle="family-list-modal" class="text-white bg-sky-blue hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">닫기</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Add Family list modal -->
+    <div id="add-family-list-modal" tabindex="0" aria-hidden="true" class="modal hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-1000 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-[440px] max-h-full">
+            <!-- Modal content -->
+            <div class="modal relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <!-- Modal header -->
+                <div class="flex items-center justify-between p-2 md:p-2 border-b rounded-t dark:border-gray-600 ml-2">
+                    <h3 class="flex flex-row items-center text-xs font-semibold text-gray-600 dark:text-white">
+                        가족추가
+                    </h3>
+
+
+                    <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="add-family-list-modal">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                </div>
+                <!-- Modal body -->
+                <form class="p-4 md:p-5">
+
+                    <div class="grid gap-6 mb-6 md:grid-cols-1">
+
+                          <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+                          <div class="flex flex-row relative">
+                              <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                  <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                                  </svg>
+                              </div>
+                              <input type="search" id="default-search" class="w-[150%] block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="환자검색" required>
+                              <select id="countries" class="ml-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <option selected>관계 선택</option>
+                                <option value="FA">부</option>
+                                <option value="MA">모</option>
+                                <option value="SP">배우자</option>
+                                <option value="SIB">형제</option>
+                                <option value="SIS">자매</option>
+                                <option value="CHILD">자녀</option>
+                                <option value="GF">조부</option>
+                                <option value="GM">조모</option>
+                              </select>
+                          </div>
+
+                    </div>
+
+
+                    <div class="flex justify-between">
+                      <button type="button" data-modal-toggle="add-family-list-modal" class="text-gray-600 bg-white border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">취소</button>
+                      <button type="button" data-modal-toggle="add-family-list-modal"  class="text-white bg-sky-blue hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">저장</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Inbody modal -->
+    <div id="inbody-modal" tabindex="0" aria-hidden="true" class="modal hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-1000 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-[640px] max-h-full">
+            <!-- Modal content -->
+            <div class="modal relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <!-- Modal header -->
+                <div class="flex items-center justify-between p-2 md:p-2 border-b rounded-t dark:border-gray-600 ml-2">
+                    <h3 class="flex flex-row items-center text-xs font-semibold text-gray-600 dark:text-white">
+                        <svg class="w-3 h-3 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 18">
+                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm-2 3h4a4 4 0 0 1 4 4v2H1v-2a4 4 0 0 1 4-4Z"/>
+                        </svg>
+                        Inbody 기록
+                    </h3>
+                    <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="inbody-modal">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                </div>
+                <!-- Modal body -->
+                <form class="p-4 md:p-5">
+                    <label for="name" class="block mb-2 text-xs font-bold text-gray-600 dark:text-white pb-2 border-b-2">2022-02-16 10:16</label>
+                    <div class="grid gap-6 mb-10 md:grid-cols-6">
+                      <div>
+                          <label for="name" class="block mb-2 text-xs font-bold text-gray-600 dark:text-white">체중</label>
+                          <input type="text" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="kg" required>
+                      </div>
+                      <div>
+                          <label for="name" class="block mb-2 text-xs font-bold text-gray-600 dark:text-white">체지방률</label>
+                          <input type="text" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="%" required>
+                      </div>
+                      <div>
+                          <label for="name" class="block mb-2 text-xs font-bold text-gray-600 dark:text-white">근육량</label>
+                          <input type="text" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="%" required>
+                      </div>
+                      <div>
+                          <label for="name" class="block mb-2 text-xs font-bold text-gray-600 dark:text-white">기초대사량</label>
+                          <input type="text" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="kal" required>
+                      </div>
+                      <div>
+                          <label for="name" class="block mb-2 text-xs font-bold text-gray-600 dark:text-white">비만도지수</label>
+                          <input type="text" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="kg/m^2" required>
+                      </div>
+                      <div>
+                          <label for="name" class="block mb-2 text-xs font-bold text-gray-600 dark:text-white">수분함량</label>
+                          <input type="text" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="%" required>
+                      </div>
+                    </div>
+
+                    <label for="name" class="block mb-2 text-xs font-bold text-gray-600 dark:text-white pb-2 border-b-2">과거내역</label>
+                    <div class="grid gap-6 mb-6 md:grid-cols-6">
+                      <div>
+                          <label for="name" class="block mb-2 text-xs font-bold text-gray-600 dark:text-white">체중</label>
+                          <span class="mb-2 text-xs font-bold text-gray-400">0kg</span>
+                      </div>
+                      <div>
+                          <label for="name" class="block mb-2 text-xs font-bold text-gray-600 dark:text-white">체지방률</label>
+                          <span class="mb-2 text-xs font-bold text-gray-400">0%</span>
+                      </div>
+                      <div>
+                          <label for="name" class="block mb-2 text-xs font-bold text-gray-600 dark:text-white">근육량</label>
+                          <span class="mb-2 text-xs font-bold text-gray-400">0%</span>
+                      </div>
+                      <div>
+                          <label for="name" class="block mb-2 text-xs font-bold text-gray-600 dark:text-white">기초대사량</label>
+                          <span class="mb-2 text-xs font-bold text-gray-400">0kal</span>
+                      </div>
+                      <div>
+                          <label for="name" class="block mb-2 text-xs font-bold text-gray-600 dark:text-white">비만도지수</label>
+                          <span class="mb-2 text-xs font-bold text-gray-400">0kg/m^2</span>
+                      </div>
+                      <div>
+                          <label for="name" class="block mb-2 text-xs font-bold text-gray-600 dark:text-white">수분함량</label>
+                          <span class="mb-2 text-xs font-bold text-gray-400">0%</span>
+                      </div>
+                    </div>
+
+                    <div class="flex justify-between">
+                      <button type="submit" class="text-gray-600 bg-white border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">취소</button>
+                      <button type="submit" class="text-white bg-sky-blue hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">확인</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- X-ray modal -->
+    <div id="x-ray-modal" tabindex="0" aria-hidden="true" class="modal hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-1000 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-[640px] max-h-full">
+            <!-- Modal content -->
+            <div class="modal relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <!-- Modal header -->
+                <div class="flex items-center justify-between p-2 md:p-2 border-b rounded-t dark:border-gray-600 ml-2">
+                    <h3 class="flex flex-row items-center text-xs font-semibold text-gray-600 dark:text-white">
+                        <svg class="w-3 h-3 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 18">
+                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm-2 3h4a4 4 0 0 1 4 4v2H1v-2a4 4 0 0 1 4-4Z"/>
+                        </svg>
+                        Inbody 기록
+                    </h3>
+                    <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="x-ray-modal">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                </div>
+                <!-- Modal body -->
+                <form class="p-4 md:p-5">
+                    <label for="name" class="block mb-2 text-xs font-bold text-gray-600 dark:text-white pb-2 border-b-2">2022-02-16 10:16</label>
+                    <div class="grid gap-6 mb-10 md:grid-cols-4">
+                      <div>
+                          <label for="name" class="block mb-2 text-xs font-bold text-gray-600 dark:text-white">촬영장비</label>
+                          <input type="text" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="kg" required>
+                      </div>
+                      <div>
+                          <label for="name" class="block mb-2 text-xs font-bold text-gray-600 dark:text-white">촬영부위</label>
+                          <input type="text" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="%" required>
+                      </div>
+                      <div>
+                          <label for="name" class="block mb-2 text-xs font-bold text-gray-600 dark:text-white">촬영담당</label>
+                          <input type="text" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="kg/m^2" required>
+                      </div>
+                      <div>
+                          <label for="name" class="block mb-2 text-xs font-bold text-gray-600 dark:text-white">사진</label>
+                          <div class="flex items-center justify-center w-full">
+                              <label for="dropzone-file" class="flex flex-col p-2 items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                                  <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                      <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
+                                      </svg>
+                                      <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
+                                      <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+                                  </div>
+                                  <input id="dropzone-file" type="file" class="hidden" />
+                              </label>
+                          </div>
+
+                      </div>
+                    </div>
+
+                    <label for="name" class="block mb-2 text-xs font-bold text-gray-600 dark:text-white pb-2 border-b-2">과거내역</label>
+                    <div class="grid gap-6 mb-6 md:grid-cols-4">
+                      <div>
+                          <label for="name" class="block mb-2 text-xs font-bold text-gray-600 dark:text-white">촬영장비</label>
+                          <span class="mb-2 text-xs font-bold text-gray-400">mri</span>
+                      </div>
+                      <div>
+                          <label for="name" class="block mb-2 text-xs font-bold text-gray-600 dark:text-white">촬영부위</label>
+                          <span class="mb-2 text-xs font-bold text-gray-400">발목</span>
+                      </div>
+                      <div>
+                          <label for="name" class="block mb-2 text-xs font-bold text-gray-600 dark:text-white">촬영담당</label>
+                          <span class="mb-2 text-xs font-bold text-gray-400">홍길동</span>
+                      </div>
+                      <div>
+                          <label for="name" class="block mb-2 text-xs font-bold text-gray-600 dark:text-white">사진</label>
+                          <span class="mb-2 text-xs font-bold text-gray-400"><a href="#">사진</a></span>
+                      </div>
+                    </div>
+
+                    <div class="flex justify-between">
+                      <button type="submit" class="text-gray-600 bg-white border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">취소</button>
+                      <button type="submit" class="text-white bg-sky-blue hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">확인</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="static h-screen flex overflow-hidden">
       <!-- SIDEBAR -->
-      <div class="w-64 py-4 px-8 bg-gray-100 border-r overflow-auto">
+      <div class="main-bar w-48 py-4 px-8 bg-gray-100 border-r overflow-auto">
         <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar" type="button" class="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
           <span class="sr-only">Open sidebar</span>
           <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
             <path clip-rule="evenodd" fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
           </svg>
         </button>
-        <aside id="logo-sidebar" class="fixed top-0 left-0 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
+        <aside id="logo-sidebar" class="fixed top-0 left-0 w-48 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
           <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
             <a href="/" class="flex items-center ps-2.5 mb-5">
               <span class="title self-center text-xl font-semibold whitespace-nowrap dark:text-white">EMR</span>
@@ -147,7 +509,7 @@ onMounted(() => {
                     <path d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z"/>
                     <path d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z"/>
                   </svg>
-                  <span class="flex-1 ms-3 whitespace-nowrap">환자차트</span>
+                  <span class="flex-1 ms-3 whitespace-nowrap">차트</span>
                   <span class="inline-flex items-center justify-center px-2 ms-3 text-sm font-medium text-gray-800 bg-gray-100 rounded-full dark:bg-gray-700 dark:text-gray-300">Pro</span>
                 </a>
               </li>
@@ -188,7 +550,7 @@ onMounted(() => {
                   <span class="flex-1 ms-3 whitespace-nowrap">수납</span>
                 </a>
               </li>
-              <li class="sidebar-login">
+              <li class="sidebar-login place-items-end">
                 <router-link to="/login">
                   <a href="/login" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                     <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 16">
@@ -202,71 +564,517 @@ onMounted(() => {
             </ul>
           </div>
         </aside>
+
       </div>
-        <div class="flex flex-col flex-1 min-w-0 overflow-hidden">
-          <header class="px-6">
-            <nav class="flex" aria-label="Breadcrumb">
-              <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
-            <!--    <li class="inline-flex items-center">-->
-            <!--      <a href="#" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">-->
-            <!--        <svg class="w-3 h-3 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">-->
-            <!--          <path d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z"/>-->
-            <!--        </svg>-->
-            <!--        홈-->
-            <!--      </a>-->
-            <!--    </li>-->
-                <li>
-                  <div class="flex items-center">
-            <!--        <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">-->
-            <!--          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>-->
-            <!--        </svg>-->
-                    <a href="#" class="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">환자차트</a>
-                  </div>
-                </li>
-                <li aria-current="page">
-                  <div class="flex items-center">
-                    <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
-                    </svg>
-                    <span class="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">박은희 환자</span>
-                  </div>
-                </li>
-              </ol>
-            </nav>
-          </header>
-          <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-              <div class="flex justify-end px-4 pt-4">
-                  <button id="dropdownButton" data-dropdown-toggle="dropdown" class="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5" type="button">
-                      <span class="sr-only">Open dropdown</span>
-                      <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
-                          <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
-                      </svg>
-                  </button>
-                  <!-- Dropdown menu -->
-                  <div id="dropdown" class="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-                      <ul class="py-2" aria-labelledby="dropdownButton">
-                      <li>
-                          <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Edit</a>
-                      </li>
-                      <li>
-                          <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Export Data</a>
-                      </li>
-                      <li>
-                          <a href="#" class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
-                      </li>
+      <div class="sub-chart-bar relative flex flex-col flex-1 min-w-0 overflow-auto">
+        <header class="px-2 w-full bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
+          <nav class="flex h-full w-14 justify-center items-center" aria-label="Breadcrumb">
+            <ol class="fixed inline-flex items-center">
+                <div class="flex items-center align-item-center">
+                  <a href="#" class="text-lg font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">차트</a>
+                </div>
+            </ol>
+          </nav>
+          <div class="search-bar">
+            <form class="flex items-center ml-2">
+              <label for="simple-search" class="sr-only">Search</label>
+              <div class="relative w-full mt-2 mb-2">
+                <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                  <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 18">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm-2 3h4a4 4 0 0 1 4 4v2H1v-2a4 4 0 0 1 4-4Z"/>
+                  </svg>
+                </div>
+                <input type="text" id="simple-search" class="search-input bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-0.55 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="환자검색(이름/차트번호/생년월일/휴대폰번호)" required>
+              </div>
+              <button type="submit" class="p-2.5 ms-2 text-sm bg-[#5A9FFE] font-medium text-white rounded-lg border border-white hover:bg-blue-800 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                </svg>
+                <span class="sr-only">Search</span>
+              </button>
+              <div class="ml-2">
+
+              </div>
+              <button type="button" class="p-2.5 ms-2 text-sm font-medium text-white rounded-lg border border-[#5A9FFE] bg-white">
+                <svg class="w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="#5A9FFE" viewBox="0 0 20 18">
+                  <path d="M6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Zm11-3h-2V5a1 1 0 0 0-2 0v2h-2a1 1 0 1 0 0 2h2v2a1 1 0 0 0 2 0V9h2a1 1 0 1 0 0-2Z"/>
+                </svg>
+              </button>
+
+
+
+            </form>
+          </div>
+        </header>
+        <div class="inline-flex flex-row overflow-hidden">
+          <div class="sticky h-screen w-80 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700 z-5">
+            <div class="pb-2">
+              <div class="sub-menu-p-list">
+                <div class="flex px-4 pt-4 justify-between items-center">
+                    <h5 class="ml-1 text-sm font-medium text-gray-800 dark:text-white">환자리스트</h5>
+                    <button id="dropdownButton" data-dropdown-toggle="dropdown" class="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5" type="button">
+                        <span class="sr-only">Open dropdown</span>
+                        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
+                            <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
+                        </svg>
+                    </button>
+                    <!-- Dropdown menu -->
+<!--                    <div id="dropdown" class="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">-->
+<!--                        <ul class="py-2" aria-labelledby="dropdownButton">-->
+<!--                        <li>-->
+<!--                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Edit</a>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Export Data</a>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <a href="#" class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>-->
+<!--                        </li>-->
+<!--                        </ul>-->
+<!--                    </div>-->
+
+                </div>
+                <div class="flex px-4 pt-4 justify-between items-center grow-0">
+                  <div class="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
+                      <ul class="flex flex-wrap -mb-px">
+                          <li class="me-2">
+                              <a href="#" class="inline-block p-1 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">대기 6</a>
+                          </li>
+                          <li class="me-2">
+                              <a href="#" class="inline-block p-1 text-sky-blue text-blue-600 border-sky border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500" aria-current="page">예약 0</a>
+                          </li>
+                          <li class="me-2">
+                              <a href="#" class="inline-block p-1 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">방문 2</a>
+                          </li>
                       </ul>
                   </div>
+                </div>
+                <div class="flex px-4 pt-2 justify-end items-center">
+                  <span class="text-gray-500 mr-1.5 text-xs font-semibold">
+                    진료실01외 4
+                  </span>
+                  <svg class="w-2 h-2 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 8">
+                    <path stroke="gray" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="m1 1 5.326 5.7a.909.909 0 0 0 1.348 0L13 1"/>
+                  </svg>
+                </div>
               </div>
-              <div class="flex flex-col items-center pb-10">
-                  <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">박은희</h5>
-                  <span class="text-sm text-gray-500 dark:text-gray-400">Visual Designer</span>
-                  <div class="flex mt-4 md:mt-6">
-                      <a href="#" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add friend</a>
-                      <a href="#" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700 ms-3">Message</a>
+            </div>
+            <div class="patient-list-cards flex px-4 pt-2 items-center">
+
+
+              <div id="accordion-open" data-accordion="open" class="w-full">
+
+                <div id="t-room-1" class="mb-2">
+                  <h2 id="accordion-open-heading-1">
+                    <button type="button" class="flex items-center justify-between w-full p-3 font-medium rtl:text-right text-gray-500 border border-gray-200 rounded-t-xl hover:bg-gray-100 dark:hover:bg-gray-800 gap-3" data-accordion-target="#accordion-open-body-1" aria-expanded="true" aria-controls="accordion-open-body-1">
+                      <span class="flex items-center text-sm"><svg class="w-5 h-5 me-2 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>진료실01</span>
+                      <span class="patient-num-each text-sm">
+                        <span class="mr-2 mb-0.2">2</span>
+                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                        </svg>
+                      </span>
+                    </button>
+                  </h2>
+                  <div id="accordion-open-body-1" class="hidden" aria-labelledby="accordion-open-heading-1">
+                    <div class="border border-gray-200 dark:border-gray-700 dark:bg-gray-900">
+                      <ul role="list" class="max-w-sm divide-y divide-gray-200 dark:divide-gray-700 border rounded-b-xl">
+                          <li class="py-2 sm:py-2">
+                              <div class="flex items-center space-x-3 rtl:space-x-reverse">
+                                  <div class="flex-shrink-0">
+                                  </div>
+                                  <div class="flex-1 min-w-0">
+                                      <p class="text-sm font-normal text-gray-900 truncate dark:text-white ml-1">
+                                          송혜교
+                                      </p>
+                                      <p class="text-sm text-gray-500 truncate dark:text-gray-400 ml-1">
+                                          여 31세
+                                      </p>
+                                  </div>
+                                  <span class="inline-flex items-center text-xs font-medium px-2.5 py-0.5 rounded-full">
+                                    <span class="text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400">
+                                      진행중
+                                    </span>
+                                  </span>
+                              </div>
+                          </li>
+                          <li class="py-2 sm:py-2">
+                              <div class="flex items-center space-x-3 rtl:space-x-reverse">
+                                  <div class="flex-shrink-0">
+                                  </div>
+                                  <div class="flex-1 min-w-0">
+                                      <p class="text-sm font-normal text-gray-900 truncate dark:text-white ml-1">
+                                          김메디
+                                      </p>
+                                      <p class="text-sm text-gray-500 truncate dark:text-gray-400 ml-1">
+                                          남 23세
+                                      </p>
+                                  </div>
+                                  <span class="inline-flex items-center text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-red-900 dark:text-red-300">
+                                      <span class="text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400">
+                                        우선대기
+                                      </span>
+                                  </span>
+                              </div>
+                          </li>
+                      </ul>
+                    </div>
                   </div>
+                </div>
+                <div id="t-room-2" class="mb-2">
+                  <h2 id="accordion-open-heading-2">
+                    <button type="button" class="flex items-center justify-between w-full p-3 font-medium rtl:text-right text-gray-500 border border-gray-200 rounded-t-xl hover:bg-gray-100 dark:hover:bg-gray-800 gap-3" data-accordion-target="#accordion-open-body-2" aria-expanded="true" aria-controls="accordion-open-body-2">
+                      <span class="flex items-center text-sm"><svg class="w-5 h-5 me-2 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>진료실02</span>
+                      <span class="patient-num-each text-sm">
+                        <span class="mr-2 mb-0.2">2</span>
+                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                        </svg>
+                      </span>
+                    </button>
+                  </h2>
+                  <div id="accordion-open-body-2" class="hidden" aria-labelledby="accordion-open-heading-2">
+                    <div class="border border-gray-200 dark:border-gray-700 dark:bg-gray-900">
+                      <ul role="list" class="max-w-sm divide-y divide-gray-200 dark:divide-gray-700 border rounded-b-xl">
+                          <li class="py-2 sm:py-2">
+                              <div class="flex items-center space-x-3 rtl:space-x-reverse">
+                                  <div class="flex-shrink-0">
+                                  </div>
+                                  <div class="flex-1 min-w-0">
+                                      <p class="text-sm font-normal text-gray-900 truncate dark:text-white ml-1">
+                                          송혜교
+                                      </p>
+                                      <p class="text-sm text-gray-500 truncate dark:text-gray-400 ml-1">
+                                          여 31세
+                                      </p>
+                                  </div>
+                                  <span class="inline-flex items-center text-xs font-medium px-2.5 py-0.5 rounded-full">
+                                    <span class="text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400">
+                                      진행중
+                                    </span>
+                                  </span>
+                              </div>
+                          </li>
+                          <li class="py-2 sm:py-2">
+                              <div class="flex items-center space-x-3 rtl:space-x-reverse">
+                                  <div class="flex-shrink-0">
+                                  </div>
+                                  <div class="flex-1 min-w-0">
+                                      <p class="text-sm font-normal text-gray-900 truncate dark:text-white ml-1">
+                                          김메디
+                                      </p>
+                                      <p class="text-sm text-gray-500 truncate dark:text-gray-400 ml-1">
+                                          남 23세
+                                      </p>
+                                  </div>
+                                  <span class="inline-flex items-center text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-red-900 dark:text-red-300">
+                                      <span class="text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400">
+                                        우선대기
+                                      </span>
+                                  </span>
+                              </div>
+                          </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div id="t-room-3" class="mb-2">
+                  <h2 id="accordion-open-heading-3">
+                    <button type="button" class="flex items-center justify-between w-full p-3 font-medium rtl:text-right text-gray-500 border border-gray-200 rounded-t-xl hover:bg-gray-100 dark:hover:bg-gray-800 gap-3" data-accordion-target="#accordion-open-body-3" aria-expanded="true" aria-controls="accordion-open-body-3">
+                      <span class="flex items-center text-sm"><svg class="w-5 h-5 me-2 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>진료실02</span>
+                      <span class="patient-num-each text-sm">
+                        <span class="mr-2 mb-0.2">2</span>
+                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                        </svg>
+                      </span>
+                    </button>
+                  </h2>
+                  <div id="accordion-open-body-3" class="hidden" aria-labelledby="accordion-open-heading-3">
+                    <div class="border border-gray-200 dark:border-gray-700 dark:bg-gray-900">
+                      <ul role="list" class="max-w-sm divide-y divide-gray-200 dark:divide-gray-700 border rounded-b-xl">
+                          <li class="py-2 sm:py-2">
+                              <div class="flex items-center space-x-3 rtl:space-x-reverse">
+                                  <div class="flex-shrink-0">
+                                  </div>
+                                  <div class="flex-1 min-w-0">
+                                      <p class="text-sm font-normal text-gray-900 truncate dark:text-white ml-1">
+                                          송혜교
+                                      </p>
+                                      <p class="text-sm text-gray-500 truncate dark:text-gray-400 ml-1">
+                                          여 31세
+                                      </p>
+                                  </div>
+                                  <span class="inline-flex items-center text-xs font-medium px-2.5 py-0.5 rounded-full">
+                                    <span class="text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400">
+                                      진행중
+                                    </span>
+                                  </span>
+                              </div>
+                          </li>
+                          <li class="py-2 sm:py-2">
+                              <div class="flex items-center space-x-3 rtl:space-x-reverse">
+                                  <div class="flex-shrink-0">
+                                  </div>
+                                  <div class="flex-1 min-w-0">
+                                      <p class="text-sm font-normal text-gray-900 truncate dark:text-white ml-1">
+                                          김메디
+                                      </p>
+                                      <p class="text-sm text-gray-500 truncate dark:text-gray-400 ml-1">
+                                          남 23세
+                                      </p>
+                                  </div>
+                                  <span class="inline-flex items-center text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-red-900 dark:text-red-300">
+                                      <span class="text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400">
+                                        우선대기
+                                      </span>
+                                  </span>
+                              </div>
+                          </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+<!--          <div class="w-160 profile h-screen flex overflow-hidden">-->
+<!--          </div>-->
+          <div class="flex flex-col w-screen h-screen overflow-hidden bg-white rounded-lg z-5 ml-3 mt-3">
+            <header class="inline-flex text-sm text-gray-500 bg-white border border-gray-200 shadow-sm w-full">
+              <div role="button" type="button" data-modal-target="p-info-modal" data-modal-toggle="p-info-modal" class="flex flex-row p-3 items-center justify-center border-r-2 border-gray-200 hover:bg-blue-50">
+                <div class="flex flex-row">
+                    <div class="flex flex-row">
+                      <p class="flex flex-row text-sm font-normal items-center">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 18">
+                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm-2 3h4a4 4 0 0 1 4 4v2H1v-2a4 4 0 0 1 4-4Z"/>
+                        </svg>
+                        <span class="ml-2">113392</span>
+                        <a class="ml-1 font-semibold">이수진</a>
+                        <span class="ml-1">여 31세 (1993-11-11)</span>
+<!--                          <span class="ml-4">-->
+<!--                            <button type="button" class="flex flex-row items-center">-->
+<!--                              <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">-->
+<!--                                <path d="M18 7.5h-.423l-.452-1.09.3-.3a1.5 1.5 0 0 0 0-2.121L16.01 2.575a1.5 1.5 0 0 0-2.121 0l-.3.3-1.089-.452V2A1.5 1.5 0 0 0 11 .5H9A1.5 1.5 0 0 0 7.5 2v.423l-1.09.452-.3-.3a1.5 1.5 0 0 0-2.121 0L2.576 3.99a1.5 1.5 0 0 0 0 2.121l.3.3L2.423 7.5H2A1.5 1.5 0 0 0 .5 9v2A1.5 1.5 0 0 0 2 12.5h.423l.452 1.09-.3.3a1.5 1.5 0 0 0 0 2.121l1.415 1.413a1.5 1.5 0 0 0 2.121 0l.3-.3 1.09.452V18A1.5 1.5 0 0 0 9 19.5h2a1.5 1.5 0 0 0 1.5-1.5v-.423l1.09-.452.3.3a1.5 1.5 0 0 0 2.121 0l1.415-1.414a1.5 1.5 0 0 0 0-2.121l-.3-.3.452-1.09H18a1.5 1.5 0 0 0 1.5-1.5V9A1.5 1.5 0 0 0 18 7.5Zm-8 6a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Z"/>-->
+<!--                              </svg>-->
+<!--                              <span class="ml-1">정보수정</span>-->
+<!--                            </button>-->
+<!--                          </span>-->
+                      </p>
+                    </div>
+                </div>
+              </div>
+
+              <div class="flex flex-row pt-3 pb-3 items-center justify-center">
+                <span class="text-xs pl-3 pr-3 border-r-2">이수진 의사</span>
+              </div>
+              <div role="button" type="button" data-modal-target="family-list-modal" data-modal-toggle="family-list-modal" class="flex flex-row p-3 items-center justify-center border-gray-200 hover:bg-blue-50">
+                <div class="flex flex-row">
+                    <div class="flex flex-row">
+                      <p class="flex flex-row text-xs font-normal items-center">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                          <path d="M16 0H4a2 2 0 0 0-2 2v1H1a1 1 0 0 0 0 2h1v2H1a1 1 0 0 0 0 2h1v2H1a1 1 0 0 0 0 2h1v2H1a1 1 0 0 0 0 2h1v1a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5.5 4.5a3 3 0 1 1 0 6 3 3 0 0 1 0-6ZM13.929 17H7.071a.5.5 0 0 1-.5-.5 3.935 3.935 0 1 1 7.858 0 .5.5 0 0 1-.5.5Z"/>
+                        </svg>
+                        <a class="ml-1 font-semibold">이아들</a>
+                        <span class="ml-1">남 11세</span>
+<!--                          <span class="ml-4">-->
+<!--                            <button type="button" class="flex flex-row items-center">-->
+<!--                              <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">-->
+<!--                                <path d="M18 7.5h-.423l-.452-1.09.3-.3a1.5 1.5 0 0 0 0-2.121L16.01 2.575a1.5 1.5 0 0 0-2.121 0l-.3.3-1.089-.452V2A1.5 1.5 0 0 0 11 .5H9A1.5 1.5 0 0 0 7.5 2v.423l-1.09.452-.3-.3a1.5 1.5 0 0 0-2.121 0L2.576 3.99a1.5 1.5 0 0 0 0 2.121l.3.3L2.423 7.5H2A1.5 1.5 0 0 0 .5 9v2A1.5 1.5 0 0 0 2 12.5h.423l.452 1.09-.3.3a1.5 1.5 0 0 0 0 2.121l1.415 1.413a1.5 1.5 0 0 0 2.121 0l.3-.3 1.09.452V18A1.5 1.5 0 0 0 9 19.5h2a1.5 1.5 0 0 0 1.5-1.5v-.423l1.09-.452.3.3a1.5 1.5 0 0 0 2.121 0l1.415-1.414a1.5 1.5 0 0 0 0-2.121l-.3-.3.452-1.09H18a1.5 1.5 0 0 0 1.5-1.5V9A1.5 1.5 0 0 0 18 7.5Zm-8 6a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Z"/>-->
+<!--                              </svg>-->
+<!--                              <span class="ml-1">정보수정</span>-->
+<!--                            </button>-->
+<!--                          </span>-->
+                      </p>
+                    </div>
+                </div>
+              </div>
+
+            </header>
+
+            <div class="inline-flex flex-row overflow-hidden">
+              <div class="sticky h-screen w-60 bg-white border border-gray-200 dark:bg-gray-800 dark:border-gray-700 z-5">
+                <div class="pb-2">
+                  <div class="sub-menu-p-list">
+                    <div class="flex px-4 pt-4 justify-between items-center">
+                        <h5 class="ml-1 text-sm font-bold text-gray-600 dark:text-white">내원이력</h5>
+                        <button id="dropdownButton" data-dropdown-toggle="dropdown" class="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5" type="button">
+                            <span class="sr-only">Open dropdown</span>
+                            <svg class="w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                              <path stroke="gray" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1v3m5-3v3m5-3v3M1 7h18M5 11h10M2 3h16a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"/>
+                            </svg>
+                        </button>
+                        <!-- Dropdown menu -->
+                        <div id="dropdown" class="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                            <ul class="py-2" aria-labelledby="dropdownButton">
+                            <li>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Edit</a>
+                            </li>
+                            <li>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Export Data</a>
+                            </li>
+                            <li>
+                                <a href="#" class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
+                            </li>
+                            </ul>
+                        </div>
+                    </div>
+
+
+                    <div class="mt-4 w-full h-screen text-xs font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                        <a href="#" aria-current="true" class="block mb-2 w-full px-4 py-2 text-gray-600 bg-blue-50 border-b border-gray-200 rounded-lg cursor-pointer dark:bg-gray-800 dark:border-gray-600">
+                            2022.02.14
+                          <span class="inline-flex items-center justify-center w-4 h-4 ms-2 text-xs font-semibold text-blue-800 bg-blue-200 rounded-full">
+                          초
+                          </span>
+                          <span class="inline-flex items-center justify-center w-4 h-4 ml-0.5 text-xs font-semibold text-blue-800 bg-blue-200 rounded-full">
+                          주
+                          </span>
+                        </a>
+                        <a href="#" class="block mb-2 w-full px-4 py-2 text-gray-600 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-100 hover:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white">
+                            2022.02.14
+                        </a>
+                        <a href="#" class="block mb-2 w-full px-4 py-2 text-gray-600 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-100 hover:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white">
+                            2022.02.13
+                        </a>
+                        <a href="#" class="block mb-2 w-full px-4 py-2 text-gray-600 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-100 hover:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white">
+                            2022.02.11
+                        </a>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex flex-col w-screen h-screen overflow-hidden bg-white rounded-lg z-5 ml-3 mt-3">
+                <div class="h-[45%] overflow-hidden">
+                    <div class="flex px-1 pt-2 pb-1 justify-between items-center">
+                        <h5 class="text-sm font-bold text-gray-600 dark:text-white">2022-02-16 10:16</h5>
+                    </div>
+                  <div class="flex flex-row w-full h-full">
+                    <div class="flex flex-col w-[50%] content-between px-2 mr-3 rounded-lg border border-b-gray-300 h-[85%]">
+                      <div class="inline-flex text-sm text-gray-500 bg-white w-full h-10 items-center">
+                        <h5 class="ml-1 text-sm font-bold text-gray-600 dark:text-white">진료 기록</h5>
+                      </div>
+
+                      <p class="flex flex-row ml-1 text-xs font-normal">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                          <path d="M16 0H4a2 2 0 0 0-2 2v1H1a1 1 0 0 0 0 2h1v2H1a1 1 0 0 0 0 2h1v2H1a1 1 0 0 0 0 2h1v2H1a1 1 0 0 0 0 2h1v1a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5.5 4.5a3 3 0 1 1 0 6 3 3 0 0 1 0-6ZM13.929 17H7.071a.5.5 0 0 1-.5-.5 3.935 3.935 0 1 1 7.858 0 .5.5 0 0 1-.5.5Z"/>
+                        </svg>
+                        <a class="ml-1 font-semibold">X-ray 1</a>
+                        <span class="ml-1">발목</span>
+                        <span class="ml-1">11:06</span>
+                        <span class="ml-1"><a href="#">사진</a></span>
+                        <span class="ml-1">| 홍길동</span>
+                      </p>
+
+
+
+
+
+                    </div>
+                    <div class="flex flex-col w-[50%] content-between px-2 mr-3 rounded-lg border border-b-gray-300 h-[85%]">
+                      <div class="inline-flex text-sm text-gray-500 bg-white w-full h-10 items-center">
+                        <h5 class="ml-1 text-sm font-bold text-gray-600 dark:text-white">검사 기록</h5>
+                      </div>
+                      <div class="grid gap-6 mb-6 md:grid-cols-2 h-full">
+                        <div class="flex flex-col h-full justify-between">
+                          <p class="flex flex-row ml-1 text-xs font-normal">
+                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                              <path d="M16 0H4a2 2 0 0 0-2 2v1H1a1 1 0 0 0 0 2h1v2H1a1 1 0 0 0 0 2h1v2H1a1 1 0 0 0 0 2h1v2H1a1 1 0 0 0 0 2h1v1a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5.5 4.5a3 3 0 1 1 0 6 3 3 0 0 1 0-6ZM13.929 17H7.071a.5.5 0 0 1-.5-.5 3.935 3.935 0 1 1 7.858 0 .5.5 0 0 1-.5.5Z"/>
+                            </svg>
+                            <a class="ml-1 font-semibold">X-ray 1</a>
+                            <span class="ml-1">발목</span>
+                            <span class="ml-1">11:06</span>
+                            <span class="ml-1"><a href="#">사진</a></span>
+                            <span class="ml-1">| 홍길동</span>
+                          </p>
+                          <div>
+                            <button type="button" data-modal-target="x-ray-modal" data-modal-toggle="x-ray-modal"  class="ml-3 px-5 py-2.5 text-xs font-medium text-white inline-flex items-center bg-[#5A9FFE] hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                              <svg class="w-3 h-3 text-gray-800 dark:text-white mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 20 20">
+                                <path d="m13.835 7.578-.005.007-7.137 7.137 2.139 2.138 7.143-7.142-2.14-2.14Zm-10.696 3.59 2.139 2.14 7.138-7.137.007-.005-2.141-2.141-7.143 7.143Zm1.433 4.261L2 12.852.051 18.684a1 1 0 0 0 1.265 1.264L7.147 18l-2.575-2.571Zm14.249-14.25a4.03 4.03 0 0 0-5.693 0L11.7 2.611 17.389 8.3l1.432-1.432a4.029 4.029 0 0 0 0-5.689Z"/>
+                              </svg>
+                              X-ray 추가
+                            </button>
+                          </div>
+                        </div>
+                        <div class="flex flex-col h-full justify-between">
+                          <div class="flex flex-col ml-1 text-xs font-normal">
+                            <div class="flex flex-row">
+                              <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                                <path d="M16 0H4a2 2 0 0 0-2 2v1H1a1 1 0 0 0 0 2h1v2H1a1 1 0 0 0 0 2h1v2H1a1 1 0 0 0 0 2h1v2H1a1 1 0 0 0 0 2h1v1a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5.5 4.5a3 3 0 1 1 0 6 3 3 0 0 1 0-6ZM13.929 17H7.071a.5.5 0 0 1-.5-.5 3.935 3.935 0 1 1 7.858 0 .5.5 0 0 1-.5.5Z"/>
+                              </svg>
+                              <a class="ml-1 font-semibold">InBody</a>
+                            </div>
+                            <span class="ml-1">체중 74kg</span>
+                            <span class="ml-1">체지방률 20%</span>
+                            <span class="ml-1">근육량 45%</span>
+                            <span class="ml-1">기초대사량 1800kal</span>
+                            <span class="ml-1">비만도지수 21kg/m^2</span>
+                            <span class="ml-1">수분함량 55%</span>
+                          </div>
+                          <div>
+                            <button type="button" data-modal-target="inbody-modal" data-modal-toggle="inbody-modal" class="ml-3 px-5 py-2.5 text-xs font-medium text-white inline-flex items-center bg-[#5A9FFE] hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                              <svg class="w-3 h-3 text-gray-800 dark:text-white mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 20 20">
+                                <path d="m13.835 7.578-.005.007-7.137 7.137 2.139 2.138 7.143-7.142-2.14-2.14Zm-10.696 3.59 2.139 2.14 7.138-7.137.007-.005-2.141-2.141-7.143 7.143Zm1.433 4.261L2 12.852.051 18.684a1 1 0 0 0 1.265 1.264L7.147 18l-2.575-2.571Zm14.249-14.25a4.03 4.03 0 0 0-5.693 0L11.7 2.611 17.389 8.3l1.432-1.432a4.029 4.029 0 0 0 0-5.689Z"/>
+                              </svg>
+                              Inbody 기록
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="h-[45%]">
+                  <div class="flex flex-col content-between px-2 mr-3 justify-between rounded-lg border border-b-gray-300 h-[85%]">
+                    <div class="inline-flex text-sm text-gray-500 bg-white w-full h-10 items-center">
+                      <h5 class="ml-1 text-sm font-bold text-gray-600 dark:text-white">진단 및 처방</h5>
+                    </div>
+                <footer class="flex space-between bg-white rounded-lg shadow border border-gray-100 dark:bg-gray-800">
+                    <div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
+                      <span class="flex flex-row items-center text-sm text-gray-500 sm:text-center dark:text-gray-400">
+                        <svg class="w-3 h-3 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                          <path stroke="gray" stroke-linejoin="round" stroke-width="2" d="M8 8v1h4V8m4 7H4a1 1 0 0 1-1-1V5h14v9a1 1 0 0 1-1 1ZM2 1h16a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1Z"/>
+                        </svg>
+                        <a class="ml-1">
+                        진료실01
+                        </a>
+                      </span>
+                      <div class="mx-6"></div>
+                      <div class="flex flex-row">
+                        <select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-22 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                          <option value="US" selected>수납실</option>
+                          <option value="CA">검사실</option>
+                          <option value="FR">입원실</option>
+                          <option value="DE">운동치료실</option>
+                          <option value="DE">작업치료실</option>
+                        </select>
+
+                        <select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-400 block w-20 p-2.5 dark:bg-gray-600 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                          <option value="US" selected>대기</option>
+                          <option value="US">우선대기</option>
+                          <option value="CA">진행중</option>
+                          <option value="FR">완료</option>
+                        </select>
+
+                        <button type="button" class="ml-3 px-5 py-2.5 text-sm font-medium text-white inline-flex items-center bg-[#5A9FFE] hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                          <svg class="rotate-90 mr-3 w-3 h-3 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 18 20">
+                            <path d="m17.914 18.594-8-18a1 1 0 0 0-1.828 0l-8 18a1 1 0 0 0 1.157 1.376L8 18.281V9a1 1 0 0 1 2 0v9.281l6.758 1.689a1 1 0 0 0 1.156-1.376Z"/>
+                          </svg>
+                          보내기
+                        </button>
+                      </div>
+
+                    </div>
+                </footer>
+                  </div>
+                </div>
               </div>
 
 
+            </div>
 
 
 
@@ -274,75 +1082,10 @@ onMounted(() => {
 
 
           </div>
-<!--<div class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800">-->
-<!--  <div class="flex justify-between p-4 md:p-6 pb-0 md:pb-0">-->
-<!--    <div>-->
-<!--      <h5 class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">$12,423</h5>-->
-<!--      <p class="text-base font-normal text-gray-500 dark:text-gray-400">Sales this week</p>-->
-<!--    </div>-->
-<!--    <div-->
-<!--      class="flex items-center px-2.5 py-0.5 text-base font-semibold text-green-500 dark:text-green-500 text-center">-->
-<!--      23%-->
-<!--      <svg class="w-3 h-3 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 14">-->
-<!--        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13V1m0 0L1 5m4-4 4 4"/>-->
-<!--      </svg>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--  <div id="labels-chart" class="px-2.5"></div>-->
-<!--  <div class="grid grid-cols-1 items-center border-gray-200 border-t dark:border-gray-700 justify-between mt-5 p-4 md:p-6 pt-0 md:pt-0">-->
-<!--    <div class="flex justify-between items-center pt-5">-->
-<!--      &lt;!&ndash; Button &ndash;&gt;-->
-<!--      <button-->
-<!--        id="dropdownDefaultButton"-->
-<!--        data-dropdown-toggle="lastDaysdropdown"-->
-<!--        data-dropdown-placement="bottom"-->
-<!--        class="text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-gray-900 text-center inline-flex items-center dark:hover:text-white"-->
-<!--        type="button">-->
-<!--        Last 7 days-->
-<!--        <svg class="w-2.5 m-2.5 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">-->
-<!--          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>-->
-<!--        </svg>-->
-<!--      </button>-->
-<!--      &lt;!&ndash; Dropdown menu &ndash;&gt;-->
-<!--      <div id="lastDaysdropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">-->
-<!--          <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">-->
-<!--            <li>-->
-<!--              <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Yesterday</a>-->
-<!--            </li>-->
-<!--            <li>-->
-<!--              <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Today</a>-->
-<!--            </li>-->
-<!--            <li>-->
-<!--              <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Last 7 days</a>-->
-<!--            </li>-->
-<!--            <li>-->
-<!--              <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Last 30 days</a>-->
-<!--            </li>-->
-<!--            <li>-->
-<!--              <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Last 90 days</a>-->
-<!--            </li>-->
-<!--          </ul>-->
-<!--      </div>-->
-<!--      <a-->
-<!--        href="#"-->
-<!--        class="uppercase text-sm font-semibold inline-flex items-center rounded-lg text-blue-600 hover:text-blue-700 dark:hover:text-blue-500  hover:bg-gray-100 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 px-3 py-2">-->
-<!--        Sales Report-->
-<!--        <svg class="w-2.5 h-2.5 ms-1.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">-->
-<!--          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>-->
-<!--        </svg>-->
-<!--      </a>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
+
+
         </div>
-
-
-
-
-
-
-
-
+      </div>
     </div>
   </body>
 </template>
@@ -363,14 +1106,13 @@ onMounted(() => {
 
 html, body {
   line-height: 1.5;
-  //min-height: 100vh;
   font-family: 'Noto Sans KR', sans-serif;
   background-color: var(--c-background-secondary);
   color: var(--c-text-primary);
   width: 100%;
   height: 100%;
   overflow: hidden;
-  position: fixed;
+  position: static;
   padding: 0;
   margin: 0;
 }
@@ -378,6 +1120,13 @@ html, body {
 img {
   display: block;
   max-width: 100%;
+}
+
+header {
+  display: flex;
+  align-content: center;
+  height: 58px;
+  background-color: white;
 }
 
 :focus {
@@ -396,7 +1145,7 @@ img {
 }
 
 .sidebar-login {
-  padding-top: 20rem;
+    padding-top: 20rem;
 }
 
 @media (min-width: 640px) {
@@ -561,6 +1310,9 @@ img {
 
 }
 
+.title {
+  font-family: 'Righteous', sans-serif;
+}
 
 
 
@@ -911,6 +1663,74 @@ html::-webkit-scrollbar-thumb {
   border: 4px solid var(--c-background-primary);
   border-radius: 99em;
 }
+
+.profile {
+  display: flex;
+  height: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+.text-settings {
+  font-size: 0.8rem;
+}
+
+.search-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+}
+
+.search-bar form button {
+}
+
+.text-sky-blue {
+  color: #5A9FFE;
+}
+
+.border-sky {
+  border-bottom-width: 3px;
+  border-bottom-color: #5A9FFE;
+}
+
+.patient-list-cards {
+  height: 100%;
+  align-items: stretch;
+  position: relative;
+}
+
+
+.fix-element {
+  position: fixed;
+}
+
+.sub-chart-bar {
+  z-index: 0;
+  position: static;
+}
+
+.main-bar {
+  z-index: 0;
+}
+
+.sub-menu-p-list {
+  background-color: white;
+}
+
+.patient-num-each {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.modal {
+  z-index: 100;
+}
+
+.bg-sky-blue {
+  background-color: #5A9FFE;
+}
+
 
 </style>
 

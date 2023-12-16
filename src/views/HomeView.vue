@@ -4,16 +4,12 @@ import { initFlowbite } from 'flowbite'
 import 'https://unpkg.com/phosphor-icons';
 import { FwbButton } from 'flowbite-vue'
 
+import SideBar from "../Components/SideBar.vue";
+
+
 onMounted(() => {
     initFlowbite();
 })
-
-// @ is an alias to /src
-// import HelloWorld from '@/components/HelloWorld.vue'
-//
-// export default {
-//   name: 'HomeView',
-// }
 
 </script>
 
@@ -22,6 +18,7 @@ onMounted(() => {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Righteous&family=Song+Myung&family=Varela+Round&display=swap" rel="stylesheet">
+    <title></title>
   </head>
   <body>
     <div class="h-screen flex overflow-hidden">
@@ -53,7 +50,7 @@ onMounted(() => {
                     <path d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z"/>
                     <path d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z"/>
                   </svg>
-                  <span class="flex-1 ms-3 whitespace-nowrap">환자차트</span>
+                  <span class="flex-1 ms-3 whitespace-nowrap">차트</span>
                   <span class="inline-flex items-center justify-center px-2 ms-3 text-sm font-medium text-gray-800 bg-gray-100 rounded-full dark:bg-gray-700 dark:text-gray-300">Pro</span>
                 </a>
               </li>
@@ -109,7 +106,7 @@ onMounted(() => {
           </div>
         </aside>
       </div>
-      <div class="flex flex-col flex-1 min-w-0 bg-white overflow-hidden">
+      <div class="flex flex-col flex-1 min-w-0 overflow-hidden">
         <header class="px-6">
           <div class="header-content flex flex-col flex-1 min-w-0 bg-white">
 <!--      overflow-hidden      -->
@@ -431,8 +428,6 @@ onMounted(() => {
           </div>
         </main>
       </div>
-
-
     </div>
   </body>
 </template>
@@ -485,15 +480,21 @@ img {
   flex-wrap: wrap;
 }
 
-.sidebar-login {
-  padding-top: 20rem;
-}
-
 @media (min-width: 640px) {
   .sidebar {
 
   }
 }
+
+.title {
+  font-family: 'Righteous', sans-serif;
+}
+
+.sidebar-login {
+  padding-top: 20rem;
+}
+
+
 
 .header {
   display: flex;
@@ -611,7 +612,7 @@ img {
   color: var(--c-text-action);
   font-size: 0.875rem;
   transition: 0.15s ease;
-  background-color: var(--c-background-primary);
+  background-color: #E7EDF5;
 }
 .button i {
   margin-right: 0.5rem;
@@ -665,17 +666,10 @@ img {
 }
 
 .main {
-  background-color: rgb(244, 244, 244);
+  background-color: var(--c-background-secondary);
   width: 100%;
   height: 100%;
   margin-inline: auto;
-}
-
-.title {
-  font-family: 'Righteous', sans-serif;
-}
-
-.sidebar-home {
 }
 
 .search {
