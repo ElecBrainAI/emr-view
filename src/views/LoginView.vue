@@ -49,7 +49,7 @@ onMounted(() => {
               <div class="login-middle flex items-center">
                 <div class="login-middle flex items-center mb-4">
                   <div class="button-selectId">
-                    <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                    <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded">
                     <label for="default-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">ID 저장</label>
                   </div>
                   <label for="link-radio" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"><a href="#" class="text-blue-600 dark:text-blue-500">비밀번호를 잊으셨나요?</a></label>
