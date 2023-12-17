@@ -3,6 +3,8 @@ import HomeView from '../views/HomeView.vue'
 import LoginView from '../views/LoginView.vue'
 import SignUpView from "../views/SignUpView.vue";
 import PatientView from "../views/PatientView.vue";
+import ReceptionView from "../views/ReceptionView.vue";
+import ReceiveView from "../views/ReceiveView.vue";
 
 const routes = [
   {
@@ -24,6 +26,16 @@ const routes = [
     path: '/patient',
     name: 'patient',
     component: PatientView
+  },
+  {
+    path: '/reception',
+    name: 'reception',
+    component: ReceptionView
+  },
+  {
+    path: '/receive',
+    name: 'receive',
+    component: ReceiveView
   }
 ]
 
